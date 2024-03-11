@@ -1,0 +1,4 @@
+class Type {
+    idType;
+    label;
+}
