@@ -6,7 +6,7 @@
 // - pokemon_ID,  
 // - pokemon name.
 
-let pokemon = [
+export let pokemon = [
     {
         "base_attack": 118,
         "base_defense": 111,
