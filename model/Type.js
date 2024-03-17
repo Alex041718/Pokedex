@@ -1,10 +1,10 @@
 class Type {
-    idType;
-    label;
+    static all_types = [];
 
-    constructor(idType, label) {
-        this.idType = idType;
-        this.label = label;
+    constructor(typeName, data) {
+        this.typeName = typeName;
+        this.data = data;
 
+        Type.all_types.push(this);
     }
 }

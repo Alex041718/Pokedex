@@ -8760,4 +8760,3 @@ let pokemon = [
         "pokemon_name": "Calyrex"
 }
 ]
-export default pokemon

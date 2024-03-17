@@ -361,4 +361,4 @@ let type_effectiveness = {
         "Steel": 1.0,
         "Water": 0.625
     }
-}
+};

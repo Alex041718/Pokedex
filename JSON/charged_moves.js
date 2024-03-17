@@ -1781,3 +1781,21 @@ let charged_moves = [
         "type": "Flying"
 }
 ]
+
+
+
+// Compte le nombre occurences de chaque move qui a le meme nom
+
+let moves = charged_moves;
+let moveCounts = {};
+
+for (let move of moves) {
+    let name = move.name;
+    if (moveCounts[name]) {
+        moveCounts[name]++;
+    } else {
+        moveCounts[name] = 1;
+    }
+}
+
+console.log(moveCounts);
