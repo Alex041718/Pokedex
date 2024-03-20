@@ -1,6 +1,6 @@
-let pokemonData = pokemon;
 
-console.log("la taille : " + pokemonData.length);
+
+//console.log("la taille : " + pokemon.length);
 // [
 //     {
 //         "base_attack": 118,
@@ -44,7 +44,7 @@ class Pokemon {
     }
 }
 
-let all_pokemons = {};
+let all_pokemons = [];
 function import_pokemon(pokemonData, pokemon_type, pokemon_moves){
 
 //TODO : Filtrer pour ne garder que les formes normales et les mapper plutôt qu'un forEach
@@ -69,25 +69,25 @@ function import_pokemon(pokemonData, pokemon_type, pokemon_moves){
             let arrayMoves = [];
             pokemon_moves.forEach(move => {
                 if (move.pokemon_id === field.pokemon_id && move.form === "Normal"){
-                    let arrayMoves = [];
                     move.charged_moves.forEach(moveName => {
                             // m c'est un nom de move
                             charged_moves.forEach(object => {
-                                    console.log("object.name" + object.name + "/ moveName : " + moveName);
+                                    //console.log("object.name" + object.name + "/ moveName : " + moveName);
                                     if (object.name === moveName){
-                                        
                                         arrayMoves.push(new Attack(object.name, object));
                                     }
                                 }
                             )
                         });
-                        move.fast_moves.forEach(m => {
+                    move.fast_moves.forEach(moveName => {
                             // m c'est un nom de move
-                                object => {
+                            fast_moves.forEach(object => {
+                                    //console.log("object.name" + object.name + "/ moveName : " + moveName);
                                     if (object.name === moveName){
                                         arrayMoves.push(new Attack(object.name, object));
                                     }
                                 }
+                            )
                         });
                     
                 }
@@ -101,7 +101,7 @@ function import_pokemon(pokemonData, pokemon_type, pokemon_moves){
                 arrayType,
                 arrayMoves
             );
-            all_pokemons[field.pokemon_id] = pokemon_obj;
+            all_pokemons.push(pokemon_obj);
         }
     });
     return all_pokemons;
@@ -109,4 +109,4 @@ function import_pokemon(pokemonData, pokemon_type, pokemon_moves){
 
 
 
-console.log(JSON.stringify(import_pokemon(pokemonData,pokemon_type,pokemon_moves), null, 2));
+//console.log(JSON.stringify(import_pokemon(pokemon,pokemon_type,pokemon_moves), null, 2));

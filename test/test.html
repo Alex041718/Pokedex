@@ -4,17 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="model/Type.js"></script>
-    <script src="model/Attack.js"></script>
-    <script src="JSON/type_effectiveness.js"></script>
-    <script src="JSON/pokemon_type.js"></script>
-    <script src="JSON/pokemon.js"></script>
-    <script src="JSON/fast_moves.js"></script>
-    <script src="JSON/charged_moves.js"></script>
-    <script src="JSON/pokemon_moves.js"></script>
+    
+    <script src="../JSON/type_effectiveness.js"></script>
+    <script src="../JSON/pokemon_type.js"></script>
+    <script src="../JSON/pokemon.js"></script>
+    <script src="../JSON/fast_moves.js"></script>
+    <script src="../JSON/charged_moves.js"></script>
+    <script src="../JSON/pokemon_moves.js"></script>
+    
+    <script src="../model/Type.js"></script>
+    <script src="../model/Attack.js"></script>
+    <script src="../model/Pokemon.js"></script>
+    
+    
+    <script src="test.js"></script>
+    <script src="renderTest.js"></script>
+
 
 </head>
 <body>
     <h1>Test</h1>
-</body>
-<script type="module" src="model/Pokemon.js"></script></html>
+    <div id="bigContainer">
+        <h2>Pokemon By Name</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Fast Move</th>
+                    <th>Charged Move</th>
+                </tr>
+            </thead>
+            <tbody id="PokemonByNameBody">
+                <tr>
+                    <td id="id"></td>
+                    <td id="name"></td>
+                    <td id="type"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body></html>

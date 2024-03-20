@@ -1786,7 +1786,7 @@ let charged_moves = [
 
 // Compte le nombre occurences de chaque move qui a le meme nom
 
-let moves = charged_moves;
+/*let moves = charged_moves;
 let moveCounts = {};
 
 for (let move of moves) {
@@ -1798,4 +1798,4 @@ for (let move of moves) {
     }
 }
 
-console.log(moveCounts);
+console.log(moveCounts);*/
