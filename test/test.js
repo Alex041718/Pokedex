@@ -1,6 +1,9 @@
 
 // FIXME: VOIR LES DIFFERENTES OPTIMISATIONS POSSIBLES
 
+
+// voir systeme controller
+
 function getPokemonByType(typeName){
     const data = import_pokemon(pokemon,pokemon_type,pokemon_moves)
     //let res = data.filter(pokemon => pokemon._type.includes(typeName));
@@ -64,5 +67,5 @@ function sortPokemonByStamina(){
 //console.log(getPokemonByAttack("Vine Whip"));
 //console.log(getAttackByType("Grass"));
 //console.log(sortPokemonByName());
-console.log("le sort by stamina 2:");
-console.log(sortPokemonByStamina());
+//console.log("le sort by stamina 2:");
+//console.log(sortPokemonByStamina());

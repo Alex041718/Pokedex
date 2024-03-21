@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Test</title>
+    <link rel="stylesheet" href="test.css">
     
     <script src="../JSON/type_effectiveness.js"></script>
     <script src="../JSON/pokemon_type.js"></script>
@@ -18,31 +19,38 @@
     
     
     <script src="test.js"></script>
-    <script src="renderTest.js"></script>
+    
 
 
 </head>
 <body>
     <h1>Test</h1>
     <div id="bigContainer">
-        <h2>Pokemon By Name</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Fast Move</th>
-                    <th>Charged Move</th>
-                </tr>
-            </thead>
-            <tbody id="PokemonByNameBody">
-                <tr>
-                    <td id="id"></td>
-                    <td id="name"></td>
-                    <td id="type"></td>
-                </tr>
-            </tbody>
-        </table>
+
+        <div class="itemContainer">
+            <h2>Pokemon By Name</h2>
+            <div class="boxTable">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Type</th>
+                        </tr>
+                    </thead>
+                    <tbody id="PokemonByNameBody">
+                        <tr>
+                            <td id="id"></td>
+                            <td id="name"></td>
+                            <td id="type"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
     </div>
-</body></html>
+</body>
+<script src="renderTest.js"></script>
+</html>

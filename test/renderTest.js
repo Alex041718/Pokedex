@@ -1,7 +1,7 @@
 
 // Pokemon By Name :
 
-let PokemonByNameBody = document.getElementById('PokemonByNameBody');
+let PokemonByNameBody = document.querySelector("#PokemonByNameBody");
 
 let PokemonByNameData = sortPokemonByName();
 
@@ -28,4 +28,6 @@ PokemonByNameData.forEach(element => {
     // append td3 to tr
     tr.appendChild(td3);
 
+    //append tr to PokemonByNameBody
+    PokemonByNameBody.appendChild(tr);
 });
