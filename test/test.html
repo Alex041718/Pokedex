@@ -5,52 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test</title>
     <link rel="stylesheet" href="test.css">
-    
+
     <script src="../JSON/type_effectiveness.js"></script>
     <script src="../JSON/pokemon_type.js"></script>
     <script src="../JSON/pokemon.js"></script>
     <script src="../JSON/fast_moves.js"></script>
     <script src="../JSON/charged_moves.js"></script>
     <script src="../JSON/pokemon_moves.js"></script>
-    
+
     <script src="../model/Type.js"></script>
     <script src="../model/Attack.js"></script>
     <script src="../model/Pokemon.js"></script>
-    
-    
+
+
     <script src="test.js"></script>
-    
 
 
 </head>
 <body>
     <h1>Test</h1>
-    <div id="bigContainer">
-
-        <div class="itemContainer">
-            <h2>Pokemon By Name</h2>
-            <div class="boxTable">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Name</th>
-                            <th>Type</th>
-                        </tr>
-                    </thead>
-                    <tbody id="PokemonByNameBody">
-                        <tr>
-                            <td id="id"></td>
-                            <td id="name"></td>
-                            <td id="type"></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-
+    <input type="text" id="parameter" placeholder="Paramètre: attack,...">
+    <div id="containerTest">
+        <a href="#" id="pokemonByType">Pokémon par type Grass</a><br>
+        <a href="#" id="pokemonByAttack">Pokémon par attaque Vine Whip</a><br>
+        <a href="#" id="attackByType">Attaques de type Grass</a><br>
+        <a href="#" id="sortPokemonByName">Pokémon triés par nom</a><br>
+        <a href="#" id="sortPokemonByStamina">Pokémon triés par endurance</a><br>
+        <a href="#" id="weakestEnemies">Pokémon les plus faibles contre Megahorn</a><br>
+        <a href="#" id="bestAttackTypes">Meilleurs types d'attaque contre Charizard</a><br>
     </div>
 </body>
-<script src="renderTest.js"></script>
 </html>

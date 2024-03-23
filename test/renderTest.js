@@ -31,3 +31,5 @@ PokemonByNameData.forEach(element => {
     //append tr to PokemonByNameBody
     PokemonByNameBody.appendChild(tr);
 });
+
+
