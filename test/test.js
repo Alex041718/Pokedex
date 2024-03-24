@@ -2,7 +2,6 @@
 // FIXME: VOIR LES DIFFERENTES OPTIMISATIONS POSSIBLES
 
 
-// voir systeme controller
 
 // FIXME: semble renvoyé des doublons
 function getPokemonByType(typeName){
@@ -180,7 +179,7 @@ function getBestAttackTypesForEnemy(enemy){
 //test
 //console.table(getPokemonByType("Grass"));
 //console.table(getPokemonByAttack("Vine Whip"));
-console.table(getAttackByType("Grass"));
+//console.table(getAttackByType("Grass"));
 //console.table(sortPokemonByName());
 //console.log("le sort by stamina 2:");
 //console.table(sortPokemonByStamina());
@@ -188,39 +187,152 @@ console.table(getAttackByType("Grass"));
 // console.log(getWeakestEnemies("Megahorn"));
 //console.log(getEffectiveness("Megahorn",["Grass","Poison"])); //
 // console.log(getBestAttackTypesForEnemy("Bulbasaur"))
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('pokemonByType').addEventListener('click', function(event) {
-        event.preventDefault();
-        console.table(getPokemonByType('Grass'));
-    });
 
-    document.getElementById('pokemonByAttack').addEventListener('click', function(event) {
-        event.preventDefault();
-        console.table(getPokemonByAttack('Vine Whip'));
-    });
+// Gestion du paramètre
 
-    document.getElementById('attackByType').addEventListener('click', function(event) {
-        event.preventDefault();
-        console.log(getAttackByType('Grass'));
-    });
-//fixme: un peu lent je trouve
-    document.getElementById('sortPokemonByName').addEventListener('click', function(event) {
-        event.preventDefault();
-        console.table(sortPokemonByName());
-    });
-//FIXME: un peu lent je trouve
-    document.getElementById('sortPokemonByStamina').addEventListener('click', function(event) {
-        event.preventDefault();
-        console.table(sortPokemonByStamina());
-    });
+function getParameter(){
+    let input = document.getElementById('parameter').value;
+    return input;
+}
 
-    document.getElementById('weakestEnemies').addEventListener('click', function(event) {
-        event.preventDefault();
-        console.log(getWeakestEnemies('Megahorn'));
-    });
+function insertParameter(value){
+    document.getElementById('parameter').value = value;
 
-    document.getElementById('bestAttackTypes').addEventListener('click', function(event) {
-        event.preventDefault();
-        console.log(getBestAttackTypesForEnemy('Charizard'));
-    });
+    clearSuggestions();
+}
+
+function clearSuggestions(){
+    let suggestionsDiv = document.getElementById('suggestions');
+    suggestionsDiv.innerHTML = '';
+}
+
+// Gestion de l'auto-complétion
+
+// on récupère une listes de strings de pokemons, d'attaques et de types
+let pokemonNames = import_pokemon(pokemon,pokemon_type,pokemon_moves).map(pokemon => pokemon._name);
+let attackNames = [];
+charged_moves.forEach(move => {
+    attackNames.push(move.name);
 });
+fast_moves.forEach(move => {
+    attackNames.push(move.name);
+});
+
+let typeNames = [];
+// type_effectiveness is a dict and the keys are the types
+Object.keys(type_effectiveness).forEach(type => {
+    typeNames.push(type);
+});
+
+// on créer une grande liste avec tout les mots pour l'auto-complétion
+let allWords = pokemonNames.concat(attackNames).concat(typeNames);
+
+// on créer un trie
+const trie = new Trie();
+allWords.forEach(word => trie.insert(word));
+
+
+
+// On récupère l'input
+
+let parameter = document.getElementById('parameter');
+parameter.addEventListener('input', function(event) {
+    let prefix = event.target.value;
+
+    if(prefix === ""){
+        clearSuggestions();
+        return;
+    }
+    if(prefix.length >= 2){
+
+        // Recherche des mots commençant par le préfixe
+        let words = trie.search(prefix);
+        // Affichage des suggestions sur notre pages
+        // On récupère la div qui contiendra les suggestions
+        let suggestionsDiv = document.getElementById('suggestions');
+        clearSuggestions()
+        // On ajoute les suggestions, des boutons contenant les mots et qui au click utilisera insertParameter(value)
+        words.forEach(word => {
+            let button = document.createElement('button');
+            button.textContent = word;
+            button.addEventListener('click', function() {
+                insertParameter(word);
+            });
+            suggestionsDiv.appendChild(button);
+        });
+    }
+    
+
+  });
+
+
+
+// Gestion des tests
+
+document.getElementById('pokemonByType').addEventListener('click', function(event) {
+    event.preventDefault();
+    let type = getParameter();
+    if(type === ""){
+        console.log("Veuillez entrer un type");
+        return;
+    }
+    console.log("Tout les pokemons de type : ",type);
+    console.table(getPokemonByType(type));
+});
+
+document.getElementById('pokemonByAttack').addEventListener('click', function(event) {
+    event.preventDefault();
+    let attack = getParameter();
+    if(attack === ""){
+        console.log("Veuillez entrer une attaque");
+        return;
+    }
+    console.log("Tout les pokemons avec l'attaque : ",attack);
+    console.table(getPokemonByAttack(attack));
+});
+
+document.getElementById('attackByType').addEventListener('click', function(event) {
+    event.preventDefault();
+    let type = getParameter();
+    if(type === ""){
+        console.log("Veuillez entrer un type");
+        return;
+    }
+    console.log("Toutes les attaques de type : ",type);
+    console.table(getAttackByType(type));
+});
+//fixme: un peu lent je trouve
+document.getElementById('sortPokemonByName').addEventListener('click', function(event) {
+    event.preventDefault();
+    console.log("Pokemons triés par nom : ");
+    console.table(sortPokemonByName());
+});
+//FIXME: un peu lent je trouve
+document.getElementById('sortPokemonByStamina').addEventListener('click', function(event) {
+    event.preventDefault();
+    console.log("Pokemons triés par stamina : ");
+    console.table(sortPokemonByStamina());
+});
+
+document.getElementById('weakestEnemies').addEventListener('click', function(event) {
+    event.preventDefault();
+    let attack = getParameter();
+    if(attack === ""){
+        console.log("Veuillez entrer une attaque");
+        return;
+    }
+    console.log("Les pokemons les plus faibles contre l'attaque : ",attack);
+    console.table(getWeakestEnemies(attack));
+});
+
+document.getElementById('bestAttackTypes').addEventListener('click', function(event) {
+    event.preventDefault();
+    let pokemon = getParameter();
+    if(pokemon === ""){
+        console.log("Veuillez entrer un pokemon");
+        return;
+    }
+    console.log("Les meilleurs types d'attaque contre : ",pokemon);
+    console.log(getBestAttackTypesForEnemy(pokemon));
+});
+ 
