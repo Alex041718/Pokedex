@@ -112,6 +112,9 @@ function getWeakestEnemies(attack){
         let typesOfPokemon = pokemon._type;
         
         let effectivenessPokemon = getEffectiveness(attack,typesOfPokemon)
+        if(effectivenessPokemon === -1){
+            return [];
+        }
         browsePokemons.push({pokemon: pokemon, effectiveness: effectivenessPokemon});
     });
 
@@ -188,7 +191,13 @@ function getBestAttackTypesForEnemy(enemy){
 //console.log(getEffectiveness("Megahorn",["Grass","Poison"])); //
 // console.log(getBestAttackTypesForEnemy("Bulbasaur"))
 
-// Gestion du paramètre
+
+
+
+
+
+
+// ------------------------ Gestion du paramètre
 
 function getParameter(){
     let input = document.getElementById('parameter').value;
@@ -201,15 +210,73 @@ function insertParameter(value){
     clearSuggestions();
 }
 
+
+
+
+// ------------------------ Helpers
+
 function clearSuggestions(){
     let suggestionsDiv = document.getElementById('suggestions');
     suggestionsDiv.innerHTML = '';
 }
 
-// Gestion de l'auto-complétion
+function isPokemon(name){
+    let pokemonNames = import_pokemon(pokemon,pokemon_type,pokemon_moves).map(pokemon => pokemon._name);
+    return pokemonNames.includes(name);
+}
+
+function isAttack(name){
+    let attackNames = [];
+    charged_moves.forEach(move => {
+        attackNames.push(move.name);
+    });
+    fast_moves.forEach(move => {
+        attackNames.push(move.name);
+    });
+    return attackNames.includes(name);
+}
+
+function isType(name){
+    let typeNames = [];
+    Object.keys(type_effectiveness).forEach(type => {
+        typeNames.push(type);
+    });
+    return typeNames.includes(name);
+}
+
+
+function getPicto(name){
+    if(isPokemon(name)){
+        name = name.toLowerCase();
+        return "https://img.pokemondb.net/sprites/go/normal/"+name+".png";
+    }
+    if(isAttack(name)){
+        return "../svg/attack.svg";
+    }
+    if(isType(name)){
+        return "../svg/type.svg";
+    }
+    return "";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ------------------------ Gestion de l'auto-complétion
 
 // on récupère une listes de strings de pokemons, d'attaques et de types
+// Tout les Pokemons
 let pokemonNames = import_pokemon(pokemon,pokemon_type,pokemon_moves).map(pokemon => pokemon._name);
+// Tout les Attaques/Moves
 let attackNames = [];
 charged_moves.forEach(move => {
     attackNames.push(move.name);
@@ -217,12 +284,13 @@ charged_moves.forEach(move => {
 fast_moves.forEach(move => {
     attackNames.push(move.name);
 });
-
+// Tout les Types
 let typeNames = [];
 // type_effectiveness is a dict and the keys are the types
 Object.keys(type_effectiveness).forEach(type => {
     typeNames.push(type);
 });
+
 
 // on créer une grande liste avec tout les mots pour l'auto-complétion
 let allWords = pokemonNames.concat(attackNames).concat(typeNames);
@@ -253,11 +321,22 @@ parameter.addEventListener('input', function(event) {
         clearSuggestions()
         // On ajoute les suggestions, des boutons contenant les mots et qui au click utilisera insertParameter(value)
         words.forEach(word => {
+            let container = document.createElement('span');
+            container.classList.add('suggestionContainer');
+            let img = document.createElement('img');
+            img.src = getPicto(word);
+            let span = document.createElement('span');
+            span.textContent = word;
+            container.appendChild(img);
+            container.appendChild(span);
+
             let button = document.createElement('button');
-            button.textContent = word;
+            button.appendChild(container);
             button.addEventListener('click', function() {
                 insertParameter(word);
             });
+            // add class .suggestionBtn
+            button.classList.add('suggestionBtn');
             suggestionsDiv.appendChild(button);
         });
     }
@@ -267,7 +346,15 @@ parameter.addEventListener('input', function(event) {
 
 
 
-// Gestion des tests
+
+
+
+
+
+
+
+
+// ------------------------ Gestion des tests
 
 document.getElementById('pokemonByType').addEventListener('click', function(event) {
     event.preventDefault();
