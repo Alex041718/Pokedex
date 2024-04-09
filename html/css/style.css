@@ -1,0 +1,57 @@
+table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+  
+table td, table th {
+    border: 1px solid #ddd; /*#f2f2f2*/
+    padding: 8px;
+    cursor: pointer;
+}
+  
+table tr:hover {
+    background-color: #eeecec;
+}
+  
+table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #ffce1c;
+    color: white;
+}
+
+table th:hover {
+    background-color: #3266ad;
+    cursor: pointer;
+}
+
+
+/* Table Cell */
+
+table td[class=idCell], table th[class=idCell] {
+    text-align: center;
+}
+
+table td[class=staminaCell], table th[class=staminaCell] {
+    text-align: center;
+}
+
+table td[class=attackCell], table th[class=attackCell] {
+    text-align: center;
+}
+
+table td[class=defenseCell], table th[class=defenseCell] {
+    text-align: center;
+}
+
+
+
+
+
+
+table td[class=imageCell] img {
+    height: 2em;
+    width: auto;
+}
