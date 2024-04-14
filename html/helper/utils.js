@@ -8,6 +8,9 @@ function getGenById(id){
        }
     }
     return res;
-    //return all_pokemons_maped.get(id)
 }
 
+function getAllTypes(){
+    let res = Object.keys(type_effectiveness);
+    return res;
+}

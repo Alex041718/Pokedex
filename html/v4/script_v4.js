@@ -104,8 +104,6 @@ window.onclick = function(event) {
 
 
 
-
-
 // -------------------------------------  Display Pokemons -------------------------------------
 
 
@@ -120,21 +118,21 @@ let pokemonMap = import_pokemon(pokemon, pokemon_type, pokemon_moves);
 let pokemonArray = Array.from(pokemonMap.entries());
 let idDeb = 0; //element tout en haut de la liste
 let idFin = 25;  //dernier element de la liste
-displayTab(); //On affiche 25 pokémons dans le tableau
+displayTab(pokemonArray); //On affiche 25 pokémons dans le tableau
 
 //Actions a realiser si les boutons sont cliqués
 document.getElementById("btn-next").addEventListener("click", nextButtonClicked)
 document.getElementById("btn-back").addEventListener("click", backButtonClicked)
 
 
-function displayTab(){
+function displayTab(listPokemon){
     const tabPokemon = document.getElementById("bodyPokemonTable");
     // Supprimer les anciennes lignes du tableau
     tabPokemon.innerHTML = '';
 
     // Parcours des données et création des lignes du tableau
-    for(let i = idDeb; i < idFin && i < pokemonArray.length; i++){
-        const [key, pokemon] = pokemonArray[i];
+    for(let i = idDeb; i < idFin && i < listPokemon.length; i++){
+        const [key, pokemon] = listPokemon[i];
     //pokemonList.forEach(pokemon => {
         let row = document.createElement("tr");
 
@@ -199,6 +197,130 @@ function displayTab(){
     }
 }
 
+// -------------------------------------  Set Filter -------------------------------------
+
+// Récupération des types
+let types = getAllTypes();
+// Crétion des options
+let selectType = document.getElementById("selectType");
+types.forEach(type => {
+    let option = document.createElement("option");
+    option.value = type;
+    option.textContent = type;
+    selectType.appendChild(option);
+});
+
+// Récupération des générations
+let generations = [1,2,3,4,5,6,7,8];
+// Crétion des options
+let selectGen = document.getElementById("selectGen");
+generations.forEach(gen => {
+    let option = document.createElement("option");
+    option.value = gen;
+    option.textContent = "Génération " + gen;
+    selectGen.appendChild(option);
+});
+
+
+
+
+// Gestion des filtres
+
+let filterManager = (generation,type,name) => {
+    // Reset de pokemonArray
+    pokemonArray = Array.from(pokemonMap.entries());
+
+    if(generation != null){
+        pokemonArray = pokemonByGeneration(pokemonArray,generation);
+    }
+    if(type != null){
+        pokemonArray = pokemonByType(pokemonArray,type);
+    }
+    if(name != null){
+        pokemonArray = pokemonByName(pokemonArray,name);
+    }
+
+    
+    // Reset des variables
+    idDeb = 0;
+    idFin = 25;
+    displayTab(pokemonArray);
+
+}
+
+let pokemonByGeneration = (listPokemon,generation) => {
+    res = [];
+    for(let i = 0; i < listPokemon.length; i++){
+        const [key, pokemon] = listPokemon[i];
+        if(pokemon._generation == generation){
+            res.push(listPokemon[i]);
+        }
+    }
+    return res;
+}
+
+let pokemonByType = (listPokemon,type) => {
+    res = [];
+    console.log(type);
+    for(let i = 0; i < listPokemon.length; i++){
+        const [key, pokemon] = listPokemon[i];
+        pokemon._type.forEach(t => {
+            if(t.typeName == type){
+
+                res.push(listPokemon[i]);
+            }
+        });
+    }
+    return res;
+}
+
+let pokemonByName = (listPokemon,name) => {
+    res = [];
+    for(let i = 0; i < listPokemon.length; i++){
+        const [key, pokemon] = listPokemon[i];
+        if(pokemon._name.includes(name)){
+            res.push(listPokemon[i]);
+        }
+    }
+    return res;
+}
+
+
+// Gestion des filtres coté DOM
+let searchInput = document.getElementById("searchInput");
+let DOMFilterManager = () => {
+    let generation = selectGen.value == "null" ? null : selectGen.value;
+    let type = selectType.value == "null" ? null : selectType.value;
+    let name = searchInput.value == "" ? null : searchInput.value;
+    
+    
+    console.log(generation);
+    console.log(type);
+    console.log(name);
+
+    filterManager(generation,type,name);
+}
+
+
+
+// Ajout des listeners sur les selects et inputs
+
+
+selectType.addEventListener("change", DOMFilterManager);
+selectGen.addEventListener("change", DOMFilterManager);
+searchInput.addEventListener("input", DOMFilterManager);
+
+
+
+
+
+
+
+
+
+
+
+// -------------------------------------  Navigation -------------------------------------
 
 // On affiche pas le bouton back si on est au début du tableau
 function displayButtonBack(){
@@ -224,14 +346,14 @@ function displayButtonNext(){
 function nextButtonClicked() {
     idDeb = idFin; 
     idFin += 25; 
-    displayTab(); 
+    displayTab(pokemonArray); 
 }
 
 //On revient aux 25 elements précédents dans le tableau
 function backButtonClicked(){
     idFin = idDeb;
     idDeb -=25;
-    displayTab();
+    displayTab(pokemonArray);
 }
 
 
