@@ -1,15 +1,27 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    text-align: center;
+    color: #3a5da9;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+
 #tableContainer {
-    max-height: 600px;
+    max-height: 420px;
     overflow-y: auto;
     width: 1000px;
     margin: auto;
-    margin-top: 3em;
+    margin-top: 1em;
     border: 1px solid #f2f2f2;
 }
 
 
 table {
-    font-family: Arial, Helvetica, sans-serif;
+    
     border-collapse: collapse;
     width: 100%;
     
@@ -82,11 +94,31 @@ table td[class=imageCell], table th[class=imageCell] {
     text-align: center;
     width: 100px;
 }
-table td[class=imageCell] img {
-    
-    height: 2em;
-    width: auto;
+table th {
+    z-index: 2;
 }
+
+table td[class=imageCell] {
+    position: relative; /* Positionnement relatif pour que l'image soit positionnée par rapport à son parent */
+}
+.largeImage {
+    display: none; /* Cache l'image par défaut */
+    position: absolute; /* Positionnement absolu par rapport à son parent */
+    top: 10px; /* Décalage en haut */
+    left: -100px; /* Décalage à gauche */
+    border-radius: 15px;
+    width: 180px; /* Largeur de l'image */
+    padding: 1em;
+    height: auto; /* Hauteur de l'image */
+    z-index: 1; /* Positionne l'image au-dessus du reste du contenu */
+    background-color: rgb(224, 222, 222); /* Fond blanc pour la grande image */
+}
+
+table td[class=imageCell]:hover .largeImage {
+    display: block; /* Montre l'image quand on survole le conteneur */
+}
+
+
 
 #btnContainer {
     padding: 1em;
@@ -128,30 +160,30 @@ table td[class=imageCell] img {
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 3; /* Sit on top */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+
+    
   }
   
 /* Modal Content/Box */
 .modal-content {
     background-color: #fefefe;
-    margin: 5% auto; /* 15% from the top and centered */
+    margin: 10% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
-    width: 35%; /* Could be more or less, depending on screen size */
-    height: 80%;
+    width: 60%; /* Could be more or less, depending on screen size */
+    height: 65%;
     overflow-y: auto;
+    border-radius: 10px;
+    
 }
 
-.modal-content img {
-    width: 200px;
-    height: auto;
-}
 
 /* The Close Button */
 .close {
@@ -166,4 +198,36 @@ table td[class=imageCell] img {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+
+#modalAttack {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    justify-content: space-around;
+}
+
+#modalAttack img {
+    width: 250px;
+    height: 250px;
+}
+
+#modalAttack .attackItem {
+    padding: 1em;
+}
+
+
+/* ------------------------------------------- Filter Part ----------------------------------------- */
+
+
+#filterContainer {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    width: 1000px;
+    margin-top: 2em;
+    gap: 1em;
 }
