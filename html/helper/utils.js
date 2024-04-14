@@ -1,5 +1,5 @@
 function getGenById(id){
-    let res = -1;
+    let res = NaN;
     for (const gen in generation) {
        for (const pokemon of generation[gen]) {
            if(pokemon.id == id){
