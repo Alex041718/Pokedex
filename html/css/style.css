@@ -1,7 +1,18 @@
+#tableContainer {
+    max-height: 600px;
+    overflow-y: auto;
+    width: 1000px;
+    margin: auto;
+    margin-top: 3em;
+    border: 1px solid #f2f2f2;
+}
+
+
 table {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
+    
 }
   
 table td, table th {
@@ -15,6 +26,8 @@ table tr:hover {
 }
   
 table th {
+    position: sticky;
+    top: 0;
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
@@ -32,18 +45,73 @@ table th:hover {
 
 table td[class=idCell], table th[class=idCell] {
     text-align: center;
+    width: 50px;
+}
+
+table td[class=nameCell], table th[class=nameCell] {
+    text-align: center;
+    width: 110px;
+}
+
+table td[class=genCell], table th[class=genCell] {
+    text-align: center;
+    width: 120px;
+}
+
+table td[class=typeCell], table th[class=typeCell] {
+    text-align: center;
+    width: 150px;
 }
 
 table td[class=staminaCell], table th[class=staminaCell] {
     text-align: center;
+    width: 100px;
 }
 
 table td[class=attackCell], table th[class=attackCell] {
     text-align: center;
+    width: 100px;
 }
 
 table td[class=defenseCell], table th[class=defenseCell] {
     text-align: center;
+    width: 100px;
+}
+
+table td[class=imageCell], table th[class=imageCell] {
+    text-align: center;
+    width: 100px;
+}
+table td[class=imageCell] img {
+    
+    height: 2em;
+    width: auto;
+}
+
+#btnContainer {
+    padding: 1em;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    width: 200px;
+}
+
+
+
+
+#btnContainer button {
+    background-color: #f2f2f2;
+    border: none;
+    color: black;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    min-width: 105px;
 }
 
 
@@ -51,7 +119,49 @@ table td[class=defenseCell], table th[class=defenseCell] {
 
 
 
-table td[class=imageCell] img {
-    height: 2em;
-    width: auto;
+
+
+
+/* ------------------------------------------- The Modal Part -------------------------------------------- */
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.modal-content img {
+    width: 200px;
+    height: auto;
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }

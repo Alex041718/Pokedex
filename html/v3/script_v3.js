@@ -1,3 +1,123 @@
+// -------------------------------------  Modal CODE -------------------------------------
+
+
+
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+
+let openModal = function() {
+  modal.style.display = "block";
+}
+
+
+// A function that insert the data in the modal and open it
+function openModalWithData(pokemon){
+    let modalTitle = document.getElementById("modalTitle");
+    let modalBody = document.getElementById("modalBody");
+    let modalImage = document.getElementById("modalImage");
+    let selectAttack = document.getElementById("selectAttack");
+    let attackContainer = document.getElementById("attackContainer"); // ul tag
+
+    modalTitle.textContent = pokemon.name;
+    console.log(pokemon);
+
+    let setAttackData = function(){
+        let attack = selectAttack.value == 1 ? "charged" : "fast" // 0 -> "charged", 1 -> "fast"
+        console.log(pokemon.moves[attack]);
+        // clear list
+        attackContainer.innerHTML = "";
+        let attackData = pokemon.moves[attack];
+        attackData.forEach(attack => {
+            let attackItem = document.createElement("div");
+            attackItem.className = "attackItem";
+            let attackTitle = document.createElement("h3");
+            attackTitle.textContent = attack.nameMove;
+            let attackDetail = document.createElement("div");
+            let attackPower = document.createElement("p");
+            attackPower.textContent = "Puissance : " + attack.data.power;
+            let attackType = document.createElement("p");
+            attackType.textContent = "Type : " + attack.data.type;
+            attackDetail.appendChild(attackPower);
+            attackDetail.appendChild(attackType);
+            attackItem.appendChild(attackTitle);
+            attackItem.appendChild(attackDetail);
+
+            
+            attackContainer.appendChild(attackItem);
+        });
+    }
+
+
+    setAttackData();
+    selectAttack.addEventListener("change", function(){
+        setAttackData();
+    });
+
+    
+
+
+
+
+
+    //Formattage de l'id pour récupérer l'image
+    let pokemonIdFormated = "" + pokemon.id
+    while(pokemonIdFormated.length < 3){
+        pokemonIdFormated = "0" + pokemonIdFormated;
+    }
+
+    modalImage.src = `../webp/images/${pokemonIdFormated}.webp`;
+    modalImage.alt = pokemon.name;
+
+    openModal();
+}
+
+// a function to clear the modal data
+function clearModalData(){
+  let modalTitle = document.getElementById("modalTitle");
+  let modalBody = document.getElementById("modalBody");
+  let modalImage = document.getElementById("modalImage");
+
+  modalTitle.textContent = "";
+  modalBody.textContent = "";
+  modalImage.src = "";
+  modalImage.alt = "";
+}
+
+
+
+
+// CLOSE MODAL
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+
+
+
+
+// -------------------------------------  Display Pokemons -------------------------------------
+
+
+
+
+
+
 // Récupération des Pokémons
 // const dataPokemons = import_pokemon(pokemon, pokemon_type, pokemon_moves);
 // Récupération du tableau (tbody)
@@ -22,6 +142,9 @@ function displayTab(){
         const [key, pokemon] = pokemonArray[i];
     //pokemonList.forEach(pokemon => {
         let row = document.createElement("tr");
+
+        row.addEventListener("click", () => {openModalWithData(pokemon)});
+
 
         let idCell = document.createElement("td");
         idCell.className = "idCell";
@@ -115,3 +238,10 @@ function backButtonClicked(){
     idDeb -=25;
     displayTab();
 }
+
+
+
+
+
+
+
