@@ -87,20 +87,23 @@ function import_pokemon(pokemonData, pokemon_type, pokemon_moves) {
                 }
             });
 
-            let arrayMoves = [];
+            let arrayMoves = {};
+            arrayMoves.fast = [];
+            arrayMoves.charged = [];
+            
             pokemon_moves.forEach(move => {
                 if (move.pokemon_id === field.pokemon_id && move.form === "Normal") {
                     move.charged_moves.forEach(moveName => {
                         charged_moves.forEach(object => {
                             if (object.name === moveName) {
-                                arrayMoves.push(new Attack(object.name, object));
+                                arrayMoves.charged.push(new Attack(object.name, object));
                             }
                         });
                     });
                     move.fast_moves.forEach(moveName => {
                         fast_moves.forEach(object => {
                             if (object.name === moveName) {
-                                arrayMoves.push(new Attack(object.name, object));
+                                arrayMoves.fast.push(new Attack(object.name, object));
                             }
                         });
                     });
