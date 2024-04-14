@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title></title>
+        <link rel="stylesheet" href="../css/style.css"/>
+
+        <script src="../data/Type.js"></script>
+        <script src="../data/Attack.js"></script>
+        <script src="../data/type_effectiveness.js"></script>
+        <script src="../data/pokemon_type.js"></script>
+        <script src="../data/pokemon.js"></script>
+        <script src="../data/fast_moves.js"></script>
+        <script src="../data/charged_moves.js"></script>
+        <script src="../data/pokemon_moves.js"></script>
+        <script src="../helper/utils.js"></script>
+        <script type="module" src="../data/Pokemons.js"></script></html>
+        <script src="../data/Pokemons.js"></script></html>
+        <script src="../data/generation.js"></script>
+        
+
+    </head>
+    <body>
+    <div id="filterContainer">
+        <label for="searchInput">Rechercher un pokémon</label>
+        <input type="text" id="searchInput" name="searchInput" placeholder="Rechercher un pokémon">
+
+        <label for="selectGen">Générations</label>
+        <select id="selectGen" name="selectGen">
+            <option value=null>Toutes les générations</option>
+        </select>
+
+        <label for="selectType">Types</label>
+        <select id="selectType" name="selectType">
+            <option value=null>Tous les types</option>
+        </select>
+        
+
+    </div>
+    <div id="tableContainer">
+        <table>
+            <thead>
+                <tr>
+                    <th class="idCell">Id</th>
+                    <th class="nameCell">Nom</th>
+                    <th class="genCell">Génération</th>
+                    <th class="typeCell">Types</th>
+                    <th class="staminaCell">Endurance</th>
+                    <th class="attackCell">Point d'attaque de base</th>
+                    <th class="defenseCell">Point de défense de base</th>
+                    <th class="imageCell">Image</th>
+                </tr>
+            </thead>
+            <tbody id="bodyPokemonTable">
+
+    <!--            <tr>
+                    <td class="idCell">1</td>
+                    <td class="nameCell">Bulbizarre</td>
+                    <td class="genCell">5</td>
+                    <td class="typeCell">Plante, Poison</td>
+                    <td class="staminaCell">90</td>
+                    <td class="attackCell">118</td>
+                    <td class="defenseCell">118</td>
+                    <td class="imageCell"><img src="../webp/images/001.webp" alt="Bulbizarre"></td>
+                </tr>
+                <tr>
+                    <td class="idCell">1</td>
+                    <td class="nameCell">Bulbizarre</td>
+                    <td class="genCell">5</td>
+                    <td class="typeCell">Plante, Poison</td>
+                    <td class="staminaCell">90</td>
+                    <td class="attackCell">118</td>
+                    <td class="defenseCell">118</td>
+                    <td class="imageCell"><img src="../webp/images/001.webp" alt="Bulbizarre"></td>
+                </tr>
+            -->
+            </tbody>
+        </table>
+    </div>
+    <div id="btnContainer">
+        <button id="btn-back">Précédent</button>
+        <button id="btn-next">Suivant</button>
+    </div>
+    </body>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h1 id="modalTitle"></h1>
+            <div id="modalBody">
+                <div id="modalAttack">
+                    <select id="selectAttack">
+                        <option value="0">Attaques Rapides</option>
+                        <option value="1">Attaques Chargées</option>
+                    </select>
+                    <div id="attackContainer">
+                        <!-- Some Attacks -->
+                        <div class="attackItem">
+                            <h3>Test</h3>
+                            <div>
+                                <p>Puissance : 10</p>
+                                <p>Type : Fire</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <img id="modalImage" src="">
+
+        </div>
+  
+  </div>
+    <script src="script_v4.js"></script>
+</html>
